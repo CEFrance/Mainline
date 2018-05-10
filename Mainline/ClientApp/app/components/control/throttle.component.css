@@ -1,0 +1,25 @@
+﻿:host {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.draggable {
+    position: absolute;
+    bottom: 0;
+    left: -35px;
+    height: 40px;
+    width: 100px;
+    cursor: n-resize;
+    background: linear-gradient(to bottom, #aebcbf 0,#6e7774 50%,#0a0e0a 51%,#0a0809 100%);
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+    width: 1em;
+    background: linear-gradient(to bottom, #fc282b 0,#f9be27 48%,#f7c12e 50%,#3ed62a 100%);
+}

@@ -1,0 +1,7 @@
+<p *ngIf="!trainLinkStatus"><em>Loading status...</em></p>
+
+<div *ngIf="trainLinkStatus">
+    <p *ngIf="trainLinkStatus.connected">eLink connected</p>
+    <p *ngIf="!trainLinkStatus.connected">eLink not connected</p>
+    <button *ngIf="!trainLinkStatus.connected" (click)="connect()">Connect</button>
+</div>

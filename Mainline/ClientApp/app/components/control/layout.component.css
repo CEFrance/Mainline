@@ -1,0 +1,11 @@
+﻿:host {
+    display: flex;
+    flex-direction: column;
+}
+
+.baseBoard {
+    flex: 1;
+    height: 800px; /* TODO */
+    background-image: url("~/Content/grid.svg");
+    position: relative;
+}

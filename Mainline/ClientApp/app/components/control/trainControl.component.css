@@ -1,0 +1,50 @@
+﻿:host {
+    display: flex;
+    flex-direction: column;
+}
+
+.controlPain {
+    display: flex;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.8em;
+}
+
+.directionControl {
+    display: flex;
+    margin: 0.2em;
+}
+
+.directionControl > button {
+    flex: 1 1 auto;
+}
+
+.directionControl > button:first-child {
+    border-radius: 8px 0 0 8px;
+    border-right: none;
+}
+
+.directionControl > button:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+button {
+    font-size: 10pt;
+    border: solid 1px #e6eaf5;
+    
+    background-color: #ffffff;
+    background-image: none;
+    box-shadow: none;
+    white-space: nowrap;
+}
+
+button.selected {
+    background-color: #f0f8ff;
+}
+
+button:hover {
+    background-color: #fcffc9;
+}

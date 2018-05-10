@@ -1,0 +1,13 @@
+﻿<div class="directionControl">
+    <button [ngClass]="{'selected': throttle.direction==1}" (click)="setDirection(1)"><<</button><!--
+    --><button [ngClass]="{'selected': throttle.direction==0}" (click)="setDirection(0)">>></button>
+</div>
+<div class="controlPain">
+    <throttle [(throttle)]="throttle" (onThrottleChange)="onThrottleChange($event)"></throttle>
+    <div class="details">
+        <span [innerText]="train.name"></span>
+        <span [innerText]="train.class"></span>
+        <span [innerText]="train.configuration"></span>
+        <span [innerText]="train.number"></span>
+    </div>
+</div>

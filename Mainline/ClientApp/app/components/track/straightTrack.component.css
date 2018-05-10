@@ -1,0 +1,8 @@
+﻿:host {
+    background-image: url(/Content/TrackSections/Straight.svg);
+    background-repeat: no-repeat;
+    background-position-x: 15px;
+    width: 100%;
+    height: 100%;
+    display: block;
+}

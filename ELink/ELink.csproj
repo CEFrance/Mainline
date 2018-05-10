@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="4.5.0-preview2-26406-04" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\XpressNetSharp-master\XpressNetSharp\XpressNetSharp.csproj" />
+    <ProjectReference Include="..\Locomotives\Locomotives.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+﻿<h2>Trains</h2>
+<p *ngIf="trainService.isLoading()"><em>Loading...</em></p>
+
+<table class='table' *ngIf="!trainService.isLoading()">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Class</th>
+        <th>Number</th>
+        <th>Owner</th>
+        <th>Configuration</th>
+        <th>Role</th>
+        <th>Address</th>
+        <th>Has Sound</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let train of trainService.getTrains()">
+        <td [innerText]="train.id"></td>
+        <td [innerText]="train.name"></td>
+        <td [innerText]="train.class"></td>
+        <td [innerText]="train.number"></td>
+        <td [innerText]="train.owner"></td>
+        <td [innerText]="train.configuration"></td>
+        <td [innerText]="trainService.getRole(train)"></td>
+        <td [innerText]="train.functions.eAddress"></td>
+        <td>
+            <span [class]="train.functions.hasSound ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div style="display: flex"*ngIf="!trainService.isLoading()">
+    <trainControl [train]="train" *ngFor="let train of trainService.getTrains()"></trainControl>
+</div>
