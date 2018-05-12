@@ -12,34 +12,26 @@ namespace Mainline.Controllers
     public class TrainController : Controller
     {
         private readonly IControlCentreService ControlService;
+        private readonly ILocomotiveRepository LocomotiveRepository;
         private readonly ILocomotiveStateService LocomotiveStateService;
 
-        public TrainController(IControlCentreService controlService, ILocomotiveStateService locomotiveStateService)
+        public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService)
         {
             ControlService = controlService;
+            LocomotiveRepository = locomotiveRepository;
             LocomotiveStateService = locomotiveStateService;
         }
 
         [HttpGet("[action]")]
         public List<ILocomotive> TrainList()
         {
-            string serializationFile = "./../trains.bin";
-
-            using (Stream stream = new FileStream(serializationFile, FileMode.Open))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                return (List<ILocomotive>)bformatter.Deserialize(stream);
-            }
+            return LocomotiveRepository.GetTrainList();
         }
 
         [HttpGet("[action]")]
-        public Boolean SaveTrainList()
+        public Boolean AddTrain()
         {
-            var trainList = TrainList(); // TODO console app to update this
-            var temp = trainList.Last();
-
-            //trainList.Add(new DieselLocomotive()
+            //var locomotive = new DieselLocomotive()
             //{
             //    Configuration = "BoBo",
             //    Functions = new EFunctions()
@@ -53,16 +45,7 @@ namespace Mainline.Controllers
             //    Owner = "British Railways",
             //    Role = LocomotiveRole.Passenger
             //});
-             
-            string dir = @"C:\Projects\Mainline";
-            string serializationFile = Path.Combine(dir, "trains.bin");
-
-            using (FileStream fileStream = new FileStream(serializationFile, FileMode.OpenOrCreate))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                bformatter.Serialize(fileStream, trainList);
-            }
-
+            //LocomotiveRepository.AddLocomotive(locomotive);
             return true;
         }
 
