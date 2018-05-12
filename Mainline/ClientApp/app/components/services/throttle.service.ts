@@ -8,7 +8,7 @@ export class ThrottleService {
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
     }
 
-    private throttle: ISpeedAndDirection;
+    private throttles: ISpeedAndDirection[] = [];
 
     setThrottle(throttle: ISpeedAndDirection) {
         this.http.post(this.baseUrl + 'api/Train/setspeedanddirection', throttle).subscribe(result => {
@@ -16,13 +16,15 @@ export class ThrottleService {
     }
 
     getThrottle(eAddress: number): ISpeedAndDirection {
-
-        if (this.throttle == null) {
+        console.log(eAddress);
+        var throttle = this.throttles.find(o => o.eAddress === eAddress);
+        if (throttle == null) {
             this.http.get(this.baseUrl + 'api/Train/getspeedanddirection', { params: { eAddress: eAddress } }).subscribe(result => {
-                this.throttle = result.json() as ISpeedAndDirection;
+                throttle = result.json() as ISpeedAndDirection;
+                this.throttles.push(throttle);
             }, error => console.error(error));
         }
 
-        return this.throttle;
+        return throttle as any;
     }
 }
