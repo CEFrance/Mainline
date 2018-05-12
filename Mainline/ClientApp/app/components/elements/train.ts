@@ -1,8 +1,3 @@
-export interface ITrainState {
-    locomotives: ITrain[];
-    state: ISpeedAndDirection[];
-}
-
 export interface ITrain {
     id: string;
     name: string;

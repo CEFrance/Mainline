@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Functions;
 using Locomotives;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using RailwayControlCentre;
 
 namespace Mainline.Controllers
@@ -23,33 +21,22 @@ namespace Mainline.Controllers
         }
 
         [HttpGet("[action]")]
-        public LocomotiveAndState TrainList()
+        public List<ILocomotive> TrainList()
         {
-            List<ILocomotive> locomotives;
-
-            string dir = @"C:\Projects\Mainline";
-            string serializationFile = Path.Combine(dir, "trains.bin");
+            string serializationFile = "./../trains.bin";
 
             using (Stream stream = new FileStream(serializationFile, FileMode.Open))
             {
                 var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-                locomotives = (List<ILocomotive>)bformatter.Deserialize(stream);
+                return (List<ILocomotive>)bformatter.Deserialize(stream);
             }
-
-            var state = LocomotiveStateService.GetState(locomotives);
-            return new LocomotiveAndState()
-            {
-                Locomotives = locomotives,
-                State = state
-            };
         }
 
         [HttpGet("[action]")]
         public Boolean SaveTrainList()
         {
-            var locomotiveAndState = TrainList(); // TODO console app to update this
-            var trainList = locomotiveAndState.Locomotives;
+            var trainList = TrainList(); // TODO console app to update this
             var temp = trainList.Last();
 
             //trainList.Add(new DieselLocomotive()
@@ -79,11 +66,33 @@ namespace Mainline.Controllers
             return true;
         }
 
+        [HttpGet("[action]")]
+        public SpeedAndDirection GetSpeedAndDirection(int eAddress)
+        {
+            var train = _GetTrain(eAddress);
+            return LocomotiveStateService.GetState(train);
+        }
+
         [HttpPost("[action]")]
         public void SetSpeedAndDirection([FromBody] SpeedAndDirection data)
         {
+            _GetTrain(data.EAddress);
+
+            LocomotiveStateService.SetState(data);
             ControlService.SetSpeedAndDirection(data);
-            LocomotiveStateService.UpdateState(data);
         }
+
+        private ILocomotive _GetTrain(int eAddress)
+        {
+            var trainList = TrainList();
+            var train = trainList.FirstOrDefault(o => o.Functions.EAddress == eAddress);
+            if (train == null)
+            {
+                throw new Exception($"Failed to find train with id: {eAddress}");
+            }
+
+            return train;
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { IThrottle } from "./../elements/throttle";
+import { ISpeedAndDirection } from "./../elements/throttle";
 declare var $: any;
 
 @Component({
@@ -8,8 +8,8 @@ declare var $: any;
     styleUrls: ['./throttle.component.css']
 })
 export class ThrottleComponent implements OnInit {
-    @Input() throttle: IThrottle;
-    @Output() onThrottleChange: EventEmitter<IThrottle> = new EventEmitter();
+    @Input() throttle: ISpeedAndDirection;
+    @Output() onThrottleChange: EventEmitter<ISpeedAndDirection> = new EventEmitter();
     @ViewChild('throttle') throttleElement: ElementRef;
 
     topOffset = 40;

@@ -1,6 +1,5 @@
-﻿import { Component, Inject } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { TrainService } from './../services/train.service';
-import { ITrain } from "./../elements/train";
 
 @Component({
     selector: 'trainList',

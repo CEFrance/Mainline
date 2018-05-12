@@ -1,7 +1,7 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
 import { ThrottleService } from './../services/throttle.service';
 import { ITrain } from "./../elements/train";
-import { IThrottle } from "./../elements/throttle";
+import { ISpeedAndDirection } from "./../elements/throttle";
 
 @Component({
     selector: 'trainControl',
@@ -10,16 +10,16 @@ import { IThrottle } from "./../elements/throttle";
 })
 export class TrainControlComponent implements OnInit {
     @Input() train: ITrain;
-    throttle: IThrottle;
+    throttle: ISpeedAndDirection;
 
     constructor(private throttleService: ThrottleService) {
     }
 
     ngOnInit() {
-        this.throttle = this.throttleService.getThrottle(this.train);
+        this.throttle = this.throttleService.getThrottle(this.train.functions.eAddress);
     }
 
-    onThrottleChange(throttle: IThrottle) {
+    onThrottleChange(throttle: ISpeedAndDirection) {
         this.throttleService.setThrottle(throttle);
     }
 

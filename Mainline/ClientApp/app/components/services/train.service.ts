@@ -1,6 +1,6 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { ITrain, ITrainState } from "./../elements/train";
+import { ITrain } from "./../elements/train";
 
 @Injectable()
 export class TrainService {
@@ -11,8 +11,7 @@ export class TrainService {
     constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
         this.loading = true;
         http.get(baseUrl + 'api/Train/TrainList').subscribe(result => {
-            var trainState = result.json() as ITrainState;
-            this.trains = trainState.locomotives;
+            this.trains = result.json() as ITrain[];
             this.loading = false;
         }, error => console.error(error));
     }
