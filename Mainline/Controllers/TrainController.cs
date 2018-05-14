@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Locomotives;
 using Microsoft.AspNetCore.Mvc;
@@ -50,10 +49,16 @@ namespace Mainline.Controllers
         }
 
         [HttpGet("[action]")]
-        public SpeedAndDirection GetSpeedAndDirection(int eAddress)
+        public List<SpeedAndDirection> GetSpeedAndDirection(int eAddress)
         {
-            var train = _GetTrain(eAddress);
-            return LocomotiveStateService.GetState(train);
+            var stateList = new List<SpeedAndDirection>();
+
+            foreach (ILocomotive locomotive in TrainList())
+            {
+                stateList.Add(LocomotiveStateService.GetState(locomotive));
+            }
+
+            return stateList;
         }
 
         [HttpPost("[action]")]

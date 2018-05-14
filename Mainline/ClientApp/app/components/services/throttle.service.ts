@@ -6,6 +6,9 @@ import { ISpeedAndDirection } from "./../elements/throttle";
 export class ThrottleService {
 
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+        this.http.get(this.baseUrl + 'api/Train/getspeedanddirection', { params: { } }).subscribe(result => {
+            this.throttles = result.json() as ISpeedAndDirection[];
+        }, error => console.error(error));
     }
 
     private throttles: ISpeedAndDirection[] = [];
@@ -16,15 +19,11 @@ export class ThrottleService {
     }
 
     getThrottle(eAddress: number): ISpeedAndDirection {
-        console.log(eAddress);
         var throttle = this.throttles.find(o => o.eAddress === eAddress);
         if (throttle == null) {
-            this.http.get(this.baseUrl + 'api/Train/getspeedanddirection', { params: { eAddress: eAddress } }).subscribe(result => {
-                throttle = result.json() as ISpeedAndDirection;
-                this.throttles.push(throttle);
-            }, error => console.error(error));
+            throw "No state";
         }
 
-        return throttle as any;
+        return throttle;
     }
 }
