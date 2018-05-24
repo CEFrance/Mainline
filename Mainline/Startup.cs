@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Mainline.Controllers;
+using Functions;
+using Mainline.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -27,8 +24,9 @@ namespace Mainline
             services.AddMvc();
             services.AddSingleton<IControlCentreService>(new ControlCentreService());
             services.AddSingleton<ILocomotiveRepository>(new LocomotiveRepository());
+            services.AddSingleton<ISignalRepository>(new SignalRepository());
             services.AddSingleton<ILocomotiveStateService>(new LocomotiveStateService());
-            services.AddSingleton<ILocomotiveStateService>(new LocomotiveStateService());
+            services.AddSingleton<IFunctionStateService>(new FunctionStateService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

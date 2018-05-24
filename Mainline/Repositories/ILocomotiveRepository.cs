@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Locomotives;
 
-namespace Mainline.Controllers
+namespace Mainline.Repositories
 {
     public interface ILocomotiveRepository
     {
         List<ILocomotive> GetTrainList();
+        void AddTrain(ILocomotive newLocomotive);
     }
 }

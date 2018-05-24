@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Locomotives;
 
-namespace Mainline.Controllers
+namespace Mainline.Repositories
 {
     public class LocomotiveRepository : ILocomotiveRepository
     {
@@ -21,7 +21,8 @@ namespace Mainline.Controllers
             {
                 var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
-                return (List<ILocomotive>)bformatter.Deserialize(stream);
+                locomotives = (List<ILocomotive>)bformatter.Deserialize(stream);
+                return locomotives;
             }
         }
 

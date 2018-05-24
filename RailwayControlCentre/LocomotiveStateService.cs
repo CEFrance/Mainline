@@ -7,20 +7,20 @@ namespace RailwayControlCentre
 {
     public class LocomotiveStateService : ILocomotiveStateService
     {
-        public List<SpeedAndDirection> state = new List<SpeedAndDirection>();
+        private readonly List<SpeedAndDirection> speedAndDirectionState = new List<SpeedAndDirection>();
 
         public SpeedAndDirection GetState(ILocomotive locomotive)
         {
-            SpeedAndDirection speedAndDirection = state.FirstOrDefault(o => o.EAddress == locomotive.Functions.EAddress);
+            SpeedAndDirection speedAndDirection = speedAndDirectionState.FirstOrDefault(o => o.EAddress == locomotive.Functions.EAddress);
             if (speedAndDirection == null)
             {
                 speedAndDirection = new SpeedAndDirection()
                 {
                     EAddress = locomotive.Functions.EAddress,
-                    speed = 10,
+                    speed = 0,
                     Direction = EDirection.Forwards
                 };
-                state.Add(speedAndDirection);
+                speedAndDirectionState.Add(speedAndDirection);
             }
 
             return speedAndDirection;
@@ -28,10 +28,10 @@ namespace RailwayControlCentre
 
         public void SetState(SpeedAndDirection data)
         {
-            SpeedAndDirection speedAndDirection = state.FirstOrDefault(o => o.EAddress == data.EAddress);
+            SpeedAndDirection speedAndDirection = speedAndDirectionState.FirstOrDefault(o => o.EAddress == data.EAddress);
             if (speedAndDirection == null)
             {
-                state.Add(data);
+                speedAndDirectionState.Add(data);
             }
             else
             {

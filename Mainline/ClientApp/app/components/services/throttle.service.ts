@@ -6,12 +6,20 @@ import { ISpeedAndDirection } from "./../elements/throttle";
 export class ThrottleService {
 
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+        this.loading = true;
+
         this.http.get(this.baseUrl + 'api/Train/getspeedanddirection', { params: { } }).subscribe(result => {
             this.throttles = result.json() as ISpeedAndDirection[];
+            this.loading = false;
         }, error => console.error(error));
     }
 
+    private loading: boolean;
     private throttles: ISpeedAndDirection[] = [];
+
+    isLoading() {
+        return this.loading;
+    }
 
     setThrottle(throttle: ISpeedAndDirection) {
         this.http.post(this.baseUrl + 'api/Train/setspeedanddirection', throttle).subscribe(result => {

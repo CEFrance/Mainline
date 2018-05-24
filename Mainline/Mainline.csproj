@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Accessories\Accessories.csproj" />
     <ProjectReference Include="..\Functions\Functions.csproj" />
     <ProjectReference Include="..\Locomotives\Locomotives.csproj" />
     <ProjectReference Include="..\RailwayControlCentre\RailwayControlCentre.csproj" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Functions
 {
@@ -7,10 +8,12 @@ namespace Functions
     {
         public ushort EAddress { get; set; }
         public bool HasSound { get; set; }
+        public List<IFunction> Function { get; }
 
         public EFunctions()
         {
             HasSound = false;
+            Function = new List<IFunction>();
         }
     }
 }

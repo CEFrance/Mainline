@@ -4,7 +4,6 @@
 <table class='table' *ngIf="!trainService.isLoading()">
     <thead>
     <tr>
-        <th>Id</th>
         <th>Name</th>
         <th>Class</th>
         <th>Number</th>
@@ -17,7 +16,6 @@
     </thead>
     <tbody>
     <tr *ngFor="let train of trainService.getTrains()">
-        <td [innerText]="train.id"></td>
         <td [innerText]="train.name"></td>
         <td [innerText]="train.class"></td>
         <td [innerText]="train.number"></td>
@@ -31,6 +29,6 @@
     </tr>
     </tbody>
 </table>
-<div style="display: flex"*ngIf="!trainService.isLoading()">
+<div style="display: flex"*ngIf="!trainService.isLoading() && !throttleService.isLoading()">
     <trainControl [train]="train" *ngFor="let train of trainService.getTrains()"></trainControl>
 </div>

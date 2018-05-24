@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Functions;
 using Locomotives;
+using Mainline.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RailwayControlCentre;
 
@@ -13,12 +15,14 @@ namespace Mainline.Controllers
         private readonly IControlCentreService ControlService;
         private readonly ILocomotiveRepository LocomotiveRepository;
         private readonly ILocomotiveStateService LocomotiveStateService;
+        private readonly IFunctionStateService FunctionStateService;
 
-        public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService)
+        public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService, IFunctionStateService functionStateService)
         {
             ControlService = controlService;
             LocomotiveRepository = locomotiveRepository;
             LocomotiveStateService = locomotiveStateService;
+            FunctionStateService = functionStateService;
         }
 
         [HttpGet("[action]")]
@@ -61,6 +65,20 @@ namespace Mainline.Controllers
             return stateList;
         }
 
+        [HttpGet("[action]")]
+        public void SetFunction(int eAddress, IFunction function)
+        {
+            var func = new Function();
+            func.FunctionIndex = 1;
+            func.FunctionType = FunctionType.Lights;
+            func.State = FunctionStates.On;
+
+            FunctionStateService.SetFunctionState(eAddress, function);
+            var functionState = FunctionStateService.GetFunctionState(eAddress);
+
+            ControlService.SetFunctions(eAddress, functionState.Functions);
+        }
+
         [HttpPost("[action]")]
         public void SetSpeedAndDirection([FromBody] SpeedAndDirection data)
         {
@@ -81,6 +99,5 @@ namespace Mainline.Controllers
 
             return train;
         }
-
     }
 }

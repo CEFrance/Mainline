@@ -1,4 +1,7 @@
-﻿using Locomotives;
+﻿using System.Collections.Generic;
+using Accessories.Signals;
+using Functions;
+using Locomotives;
 
 namespace RailwayControlCentre
 {
@@ -8,5 +11,7 @@ namespace RailwayControlCentre
         void Disconnect();
         bool GetIsConnected();
         void SetSpeedAndDirection(SpeedAndDirection data);
+        void SetFunctions(int eAddress, List<IFunction> functions);
+        void SetSignal(ISignal signal);
     }
 }
