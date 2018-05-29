@@ -36,12 +36,13 @@ namespace ELink
             msg.Write(serialPort.BaseStream);
         }
 
-        public void SetLocomotiveFunction(int eAddress, List<IFunction> functionList)
+        public void SetFunctions(int eAddress, List<IFunc> functionList)
         {
-            var functionMapping = _GetFunctionMapping(functionList);
+            var group1Functions = _GetGroup1FunctionMapping(functionList);
+            //var group2Functions = _GetGroup2FunctionMapping(functionList);
 
-            //var msg = new SetFunctionOperationInstruction_Group1Message(eAddress, functionMapping[0], functionMapping[1], functionMapping[2], functionMapping[3], functionMapping[4]);
-            //msg.Write(SerialPort.BaseStream);
+            var msg = new SetFunctionOperationInstruction_Group1Message(eAddress, group1Functions[0], group1Functions[1], group1Functions[2], group1Functions[3], group1Functions[4]);
+            msg.Write(serialPort.BaseStream);
 
             // We need to reset sound functions
             //msgFunction = new SetFunctionOperationInstruction_Group1Message(eAddress, FunctionState.Off, FunctionState.Off, FunctionState.Off, FunctionState.Off, FunctionState.Off);
@@ -68,12 +69,16 @@ namespace ELink
             msg.Write(serialPort.BaseStream);
         }
 
-        private FuncState[] _GetFunctionMapping(List<IFunction> functionList)
+        private FuncState[] _GetGroup1FunctionMapping(List<IFunc> functionList)
         {
+            var functionsInGroup = 5;
+
             FuncState[] functionMapping = { };
-            foreach (IFunction function in functionList.OrderBy(o => o.FunctionIndex))
+
+            for (var cursor = 0; cursor < functionsInGroup; cursor++)
             {
-                //functionMapping[function.FunctionIndex] = function.State == FunctionStates.On ? FunctionState.On : FunctionState.Off;
+                var function = functionList.FirstOrDefault(o => o.FunctionIndex == cursor);
+                functionMapping[cursor] = function != null ? (function.State == FuncStates.On ? FunctionState.On : FunctionState.Off) : FunctionState.Off;
             }
 
             return functionMapping;
