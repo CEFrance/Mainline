@@ -5,7 +5,7 @@ namespace Mainline.Repositories
 {
     public interface ILocomotiveRepository
     {
-        List<ILocomotive> GetTrainList();
-        void AddTrain(ILocomotive newLocomotive);
+        List<ILocomotive> GetList();
+        void Add(ILocomotive newLocomotive);
     }
 }

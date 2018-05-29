@@ -10,7 +10,7 @@ namespace Mainline.Repositories
         private string SerializationFile = "./../trains.bin";
         private List<ILocomotive> locomotives = new List<ILocomotive>();
 
-        public List<ILocomotive> GetTrainList()
+        public List<ILocomotive> GetList()
         {
             if (locomotives.Any())
             {
@@ -26,19 +26,19 @@ namespace Mainline.Repositories
             }
         }
 
-        public void AddTrain(ILocomotive newLocomotive)
+        public void Add(ILocomotive newLocomotive)
         {
-            var trainList = GetTrainList();
-            trainList.Add(newLocomotive);
-            SaveTrainList(trainList);
+            var locomotives = GetList();
+            locomotives.Add(newLocomotive);
+            SaveList(locomotives);
         }
         
-        private void SaveTrainList(List<ILocomotive> trainList)
+        private void SaveList(List<ILocomotive> locomotives)
         {
             using (FileStream fileStream = new FileStream(SerializationFile, FileMode.OpenOrCreate))
             {
                 var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                bformatter.Serialize(fileStream, trainList);
+                bformatter.Serialize(fileStream, locomotives);
             }
         }
     }

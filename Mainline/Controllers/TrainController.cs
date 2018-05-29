@@ -28,7 +28,7 @@ namespace Mainline.Controllers
         [HttpGet("[action]")]
         public List<ILocomotive> TrainList()
         {
-            return LocomotiveRepository.GetTrainList();
+            return LocomotiveRepository.GetList();
         }
 
         [HttpGet("[action]")]
