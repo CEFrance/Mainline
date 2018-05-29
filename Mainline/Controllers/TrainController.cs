@@ -12,23 +12,23 @@ namespace Mainline.Controllers
     [Route("api/[controller]")]
     public class TrainController : Controller
     {
-        private readonly IControlCentreService ControlService;
-        private readonly ILocomotiveRepository LocomotiveRepository;
-        private readonly ILocomotiveStateService LocomotiveStateService;
-        private readonly IFunctionStateService FunctionStateService;
+        private readonly IControlCentreService controlService;
+        private readonly ILocomotiveRepository locomotiveRepository;
+        private readonly ILocomotiveStateService locomotiveStateService;
+        private readonly IFunctionStateService functionStateService;
 
         public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService, IFunctionStateService functionStateService)
         {
-            ControlService = controlService;
-            LocomotiveRepository = locomotiveRepository;
-            LocomotiveStateService = locomotiveStateService;
-            FunctionStateService = functionStateService;
+            this.controlService = controlService;
+            this.locomotiveRepository = locomotiveRepository;
+            this.locomotiveStateService = locomotiveStateService;
+            this.functionStateService = functionStateService;
         }
 
         [HttpGet("[action]")]
         public List<ILocomotive> TrainList()
         {
-            return LocomotiveRepository.GetList();
+            return locomotiveRepository.GetList();
         }
 
         [HttpGet("[action]")]
@@ -59,7 +59,7 @@ namespace Mainline.Controllers
 
             foreach (ILocomotive locomotive in TrainList())
             {
-                stateList.Add(LocomotiveStateService.GetState(locomotive));
+                stateList.Add(locomotiveStateService.GetState(locomotive));
             }
 
             return stateList;
@@ -73,10 +73,10 @@ namespace Mainline.Controllers
             func.FunctionType = FunctionType.Lights;
             func.State = FunctionStates.On;
 
-            FunctionStateService.SetFunctionState(eAddress, function);
-            var functionState = FunctionStateService.GetFunctionState(eAddress);
+            functionStateService.SetFunctionState(eAddress, function);
+            var functionState = functionStateService.GetFunctionState(eAddress);
 
-            ControlService.SetFunctions(eAddress, functionState.Functions);
+            controlService.SetFunctions(eAddress, functionState.Functions);
         }
 
         [HttpPost("[action]")]
@@ -84,8 +84,8 @@ namespace Mainline.Controllers
         {
             _GetTrain(data.EAddress);
 
-            LocomotiveStateService.SetState(data);
-            ControlService.SetSpeedAndDirection(data);
+            locomotiveStateService.SetState(data);
+            controlService.SetSpeedAndDirection(data);
         }
 
         private ILocomotive _GetTrain(int eAddress)

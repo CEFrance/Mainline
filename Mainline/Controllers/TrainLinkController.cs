@@ -6,11 +6,11 @@ namespace Mainline.Controllers
     [Route("api/[controller]")]
     public class TrainLinkController : Controller
     {
-        private readonly IControlCentreService ControlService;
+        private readonly IControlCentreService controlService;
 
         public TrainLinkController(IControlCentreService controlService)
         {
-            ControlService = controlService;
+            this.controlService = controlService;
         }
 
         [HttpGet("[action]")]
@@ -18,27 +18,27 @@ namespace Mainline.Controllers
         {
             return new TrainLinkStatus()
             {
-                Connected = ControlService.GetIsConnected()
+                Connected = controlService.GetIsConnected()
             };
         }
 
         [HttpGet("[action]")]
         public TrainLinkStatus Connect()
         {
-            ControlService.Connect();
+            controlService.Connect();
             return new TrainLinkStatus()
             {
-                Connected = ControlService.GetIsConnected()
+                Connected = controlService.GetIsConnected()
             };
         }
 
         [HttpGet("[action]")]
         public TrainLinkStatus Disconnect()
         {
-            ControlService.Disconnect();
+            controlService.Disconnect();
             return new TrainLinkStatus()
             {
-                Connected = ControlService.GetIsConnected()
+                Connected = controlService.GetIsConnected()
             };
         }
     }
