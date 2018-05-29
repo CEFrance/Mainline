@@ -10,7 +10,7 @@ namespace Mainline.Repositories
         private string SerializationFile = "./../signals.bin";
         private List<ISignal> signals = new List<ISignal>();
 
-        public List<ISignal> GetSignalList()
+        public List<ISignal> GetList()
         {
             if (Enumerable.Any<ISignal>(signals))
             {
@@ -26,9 +26,9 @@ namespace Mainline.Repositories
             }
         }
 
-        public void AddSignal(ISignal newSignal)
+        public void Add(ISignal newSignal)
         {
-            var signalList = GetSignalList();
+            var signalList = GetList();
             signalList.Add(newSignal);
             SaveSignalList(signalList);
         }

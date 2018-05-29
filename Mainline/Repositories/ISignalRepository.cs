@@ -5,7 +5,7 @@ namespace Mainline.Repositories
 {
     public interface ISignalRepository
     {
-        List<ISignal> GetSignalList();
-        void AddSignal(ISignal newSignal);
+        List<ISignal> GetList();
+        void Add(ISignal newSignal);
     }
 }

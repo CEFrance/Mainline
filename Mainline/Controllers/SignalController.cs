@@ -32,13 +32,13 @@ namespace Mainline.Controllers
                 },
                 State = SignalColour.Green
             };
-            SignalRepository.AddSignal(newSignal);
+            SignalRepository.Add(newSignal);
         }
 
         [HttpGet("[action]")]
         public void SetSignal(ushort signalAddress, SignalColour signalColour)
         {
-            var signals = SignalRepository.GetSignalList();
+            var signals = SignalRepository.GetList();
             var signal = signals.First(o => o.Functions.EAddress == signalAddress);
             signal.State = signalColour;
 
