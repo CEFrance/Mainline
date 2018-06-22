@@ -26,7 +26,7 @@ namespace Mainline.Controllers
         }
 
         [HttpGet("[action]")]
-        public List<ILocomotive> TrainList()
+        public List<Locomotive> TrainList()
         {
             return locomotiveRepository.GetList();
         }
@@ -34,21 +34,90 @@ namespace Mainline.Controllers
         [HttpGet("[action]")]
         public Boolean AddTrain()
         {
-            //var locomotive = new DieselLocomotive()
+            //var locomotive4 = new Locomotive
             //{
-            //    Configuration = "BoBo",
+            //    Configuration = "0-6-0",
             //    Functions = new EFunctions()
             //    {
-            //        EAddress = 8,
+            //        EAddress = 4,
             //        HasSound = false
             //    },
             //    Id = Guid.NewGuid(),
-            //    Name = "101 DMU",
-            //    Number = "E51217",
-            //    Owner = "British Railways",
-            //    Role = LocomotiveRole.Passenger
-            //});
-            //LocomotiveRepository.AddLocomotive(locomotive);
+            //    Name = "King Richard II",
+            //    Number = "2721",
+            //    Owner = "GWR",
+            //    Role = LocomotiveRole.Mixed,
+            //    Type = LocomotiveType.Steam
+            //};
+            //locomotiveRepository.Add(locomotive4);
+
+            var locomotive5 = new Locomotive
+            {
+                Configuration = "2-6-0",
+                Functions = new EFunctions()
+                {
+                    EAddress = 5,
+                    HasSound = true
+                },
+                Id = Guid.NewGuid(),
+                Name = "King Richard II",
+                Number = "6021",
+                Owner = "British Rail",
+                Role = LocomotiveRole.Passenger,
+                Type = LocomotiveType.Steam
+            };
+            locomotiveRepository.Add(locomotive5);
+
+            var locomotive6 = new Locomotive
+            {
+                Configuration = "4-4-2T",
+                Functions = new EFunctions()
+                {
+                    EAddress = 6,
+                    HasSound = false
+                },
+                Id = Guid.NewGuid(),
+                Name = "",
+                Number = "415",
+                Owner = "LSWR",
+                Role = LocomotiveRole.Mixed,
+                Type = LocomotiveType.Steam
+            };
+            locomotiveRepository.Add(locomotive6);
+
+            var locomotive7 = new Locomotive
+            {
+                Configuration = "2-6-4T",
+                Functions = new EFunctions()
+                {
+                    EAddress = 7,
+                    HasSound = false
+                },
+                Id = Guid.NewGuid(),
+                Name = "",
+                Number = "42334",
+                Owner = "British Railways",
+                Role = LocomotiveRole.Mixed,
+                Type = LocomotiveType.Steam
+            };
+            locomotiveRepository.Add(locomotive7);
+
+            var locomotive8 = new Locomotive
+            {
+                Configuration = "BoBo",
+                Functions = new EFunctions()
+                {
+                    EAddress = 8,
+                    HasSound = false
+                },
+                Id = Guid.NewGuid(),
+                Name = "101 DMU",
+                Number = "E51217",
+                Owner = "British Railways",
+                Role = LocomotiveRole.Passenger,
+                Type = LocomotiveType.Diesel
+            };
+            locomotiveRepository.Add(locomotive8);
             return true;
         }
 

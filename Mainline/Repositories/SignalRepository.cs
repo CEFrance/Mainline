@@ -2,43 +2,42 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Accessories.Signals;
+using Newtonsoft.Json;
 
 namespace Mainline.Repositories
 {
     public class SignalRepository : ISignalRepository
     {
-        private string SerializationFile = "./../signals.bin";
-        private List<ISignal> signals = new List<ISignal>();
+        private string serializationFile = "./../signals.json";
+        private List<Signal> signals = new List<Signal>();
 
-        public List<ISignal> GetList()
+        public List<Signal> GetList()
         {
             if (signals.Any())
             {
                 return signals;
             }
 
-            using (Stream stream = new FileStream(SerializationFile, FileMode.Open))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                signals = (List<ISignal>)bformatter.Deserialize(stream);
-                return signals;
-            }
+            signals = JsonConvert.DeserializeObject<List<Signal>>(File.ReadAllText(serializationFile));
+            return signals;
         }
 
-        public void Add(ISignal newSignal)
+        public void Add(Signal newSignal)
         {
             var signalList = GetList();
             signalList.Add(newSignal);
-            SaveSignalList(signalList);
+            Save(signalList);
         }
 
-        private void SaveSignalList(List<ISignal> signalList)
+        private void Save(List<Signal> signalList)
         {
-            using (FileStream fileStream = new FileStream(SerializationFile, FileMode.OpenOrCreate))
+            var contentsToWriteToFile = JsonConvert.SerializeObject(signalList, new JsonSerializerSettings
             {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                bformatter.Serialize(fileStream, signalList);
+                Formatting = Formatting.Indented,
+            });
+            using (var writer = new StreamWriter(serializationFile))
+            {
+                writer.Write(contentsToWriteToFile);
             }
         }
     }

@@ -11,7 +11,8 @@ namespace Locomotives
         string Class { get; set; }
         string Owner { get; set; }
         string Configuration { get; set; }
+        LocomotiveType Type { get; set; }
         LocomotiveRole Role { get; set; }
-        IEFunctions Functions { get; set; }
+        EFunctions Functions { get; set; }
     }
 }

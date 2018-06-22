@@ -2,43 +2,42 @@
 using System.IO;
 using System.Linq;
 using Locomotives;
+using Newtonsoft.Json;
 
 namespace Mainline.Repositories
 {
     public class LocomotiveRepository : ILocomotiveRepository
     {
-        private string SerializationFile = "./../trains.bin";
-        private List<ILocomotive> locomotives = new List<ILocomotive>();
+        private string serializationFile = "./../trains.json";
+        private List<Locomotive> locomotives = new List<Locomotive>();
 
-        public List<ILocomotive> GetList()
+        public List<Locomotive> GetList()
         {
             if (locomotives.Any())
             {
                 return locomotives;
             }
 
-            using (Stream stream = new FileStream(SerializationFile, FileMode.Open))
-            {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                locomotives = (List<ILocomotive>)bformatter.Deserialize(stream);
-                return locomotives;
-            }
+            locomotives = JsonConvert.DeserializeObject<List<Locomotive>>(File.ReadAllText(serializationFile));
+            return locomotives;
         }
 
-        public void Add(ILocomotive newLocomotive)
+        public void Add(Locomotive newLocomotive)
         {
-            var locomotives = GetList();
-            locomotives.Add(newLocomotive);
-            SaveList(locomotives);
+            var locomotiveList = GetList();
+            locomotiveList.Add(newLocomotive);
+            SaveList(locomotiveList);
         }
         
-        private void SaveList(List<ILocomotive> locomotives)
+        private void SaveList(List<Locomotive> locomotiveList)
         {
-            using (FileStream fileStream = new FileStream(SerializationFile, FileMode.OpenOrCreate))
+            var contentsToWriteToFile = JsonConvert.SerializeObject(locomotiveList, new JsonSerializerSettings
             {
-                var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                bformatter.Serialize(fileStream, locomotives);
+                Formatting = Formatting.Indented,
+            });
+            using (var writer = new StreamWriter(serializationFile))
+            {
+                writer.Write(contentsToWriteToFile);
             }
         }
     }

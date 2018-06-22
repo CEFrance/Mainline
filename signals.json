@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "b76d84fa-93ae-48a7-b601-8aae98023bfa",
+    "Aspects": [
+      0,
+      3,
+      1,
+      2
+    ],
+    "Functions": {
+      "EAddress": 2,
+      "HasSound": false,
+      "Function": []
+    },
+    "State": 3
+  }
+]

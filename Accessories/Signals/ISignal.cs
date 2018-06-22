@@ -8,7 +8,7 @@ namespace Accessories.Signals
     {
         Guid Id { get; set; }
         List<SignalColour> Aspects { get; set; }
-        IEFunctions Functions { get; set; }
+        EFunctions Functions { get; set; }
         SignalColour State { get; set; }
     }
 }

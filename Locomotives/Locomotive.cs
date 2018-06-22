@@ -3,8 +3,7 @@ using Functions;
 
 namespace Locomotives
 {
-    [Serializable]
-    public abstract class Locomotive : ILocomotive
+    public class Locomotive : ILocomotive
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -12,7 +11,8 @@ namespace Locomotives
         public string Class { get; set; }
         public string Owner { get; set; }
         public string Configuration { get; set; }
+        public LocomotiveType Type { get; set; }
         public LocomotiveRole Role { get; set; }
-        public IEFunctions Functions { get; set; }
+        public EFunctions Functions { get; set; }
     }
 }

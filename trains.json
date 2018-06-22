@@ -1,0 +1,77 @@
+[
+  {
+    "Id": "e639c5fd-3d97-4012-b33c-a94310b9b91e",
+    "Name": "King Richard II",
+    "Number": "2721",
+    "Class": null,
+    "Owner": "GWR",
+    "Configuration": "0-6-0",
+    "Type": 0,
+    "Role": 0,
+    "Functions": {
+      "EAddress": 4,
+      "HasSound": false,
+      "Function": []
+    }
+  },
+  {
+    "Id": "599e3ed2-e4e0-41bd-b6df-cdab0b90659c",
+    "Name": "King Richard II",
+    "Number": "6021",
+    "Class": null,
+    "Owner": "British Rail",
+    "Configuration": "2-6-0",
+    "Type": 0,
+    "Role": 1,
+    "Functions": {
+      "EAddress": 5,
+      "HasSound": true,
+      "Function": []
+    }
+  },
+  {
+    "Id": "47c9a0f0-ddca-44ed-a475-69eea2cf997e",
+    "Name": "",
+    "Number": "415",
+    "Class": null,
+    "Owner": "LSWR",
+    "Configuration": "4-4-2T",
+    "Type": 0,
+    "Role": 0,
+    "Functions": {
+      "EAddress": 6,
+      "HasSound": false,
+      "Function": []
+    }
+  },
+  {
+    "Id": "6d7390bd-8b04-4e77-b7e9-0f7c82130691",
+    "Name": "",
+    "Number": "42334",
+    "Class": null,
+    "Owner": "British Railways",
+    "Configuration": "2-6-4T",
+    "Type": 0,
+    "Role": 0,
+    "Functions": {
+      "EAddress": 7,
+      "HasSound": false,
+      "Function": []
+    }
+  },
+  {
+    "Id": "55dda595-66f8-4310-913c-7b44db540de1",
+    "Name": "101 DMU",
+    "Number": "E51217",
+    "Class": null,
+    "Owner": "British Railways",
+    "Configuration": "BoBo",
+    "Type": 1,
+    "Role": 1,
+    "Functions": {
+      "EAddress": 8,
+      "HasSound": false,
+      "Function": []
+    }
+  }
+]

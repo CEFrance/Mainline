@@ -1,9 +1,7 @@
-﻿using System;
-using Functions;
+﻿using Functions;
 
 namespace Locomotives
 {
-    [Serializable]
     public class SpeedAndDirection : ISpeedAndDirection
     {
         public ushort EAddress { get; set; }
