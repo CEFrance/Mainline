@@ -11,7 +11,7 @@ namespace RailwayControlCentre
         void Disconnect();
         bool GetIsConnected();
         void SetSpeedAndDirection(SpeedAndDirection data);
-        void SetFunctions(int eAddress, List<IFunction> functions);
+        void SetFunctions(int eAddress, List<IFunc> functions);
         void SetSignal(ISignal signal);
     }
 }

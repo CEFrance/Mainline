@@ -8,12 +8,12 @@ namespace Functions
     {
         public ushort EAddress { get; set; }
         public bool HasSound { get; set; }
-        public List<IFunction> Function { get; }
+        public List<IFunc> Function { get; }
 
         public EFunctions()
         {
             HasSound = false;
-            Function = new List<IFunction>();
+            Function = new List<IFunc>();
         }
     }
 }

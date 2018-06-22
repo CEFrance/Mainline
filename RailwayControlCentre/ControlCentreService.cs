@@ -38,11 +38,11 @@ namespace RailwayControlCentre
             }
         }
 
-        public void SetFunctions(int eAddress, List<IFunction> functions)
+        public void SetFunctions(int eAddress, List<IFunc> functions)
         {
             if (eLinkController.IsConnected)
             {
-                eLinkController.SetLocomotiveFunction(eAddress, functions);
+                eLinkController.SetFunctions(eAddress, functions);
             }
         }
 

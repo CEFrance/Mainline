@@ -1,6 +1,6 @@
 ﻿namespace Functions
 {
-    public enum FunctionType
+    public enum FuncType
     {
         Lights,
         Sound
