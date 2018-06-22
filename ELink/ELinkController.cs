@@ -32,8 +32,16 @@ namespace ELink
 
         public void SetLocomotiveSpeedAndDirection(SpeedAndDirection data)
         {
-            var msg = new SetLocoSpeedAndDirection_SpeedSteps128Message(data.EAddress, (byte) data.speed, (data.Direction == EDirection.Forwards) ? Direction.Forward : Direction.Reverse);
-            msg.Write(serialPort.BaseStream);
+            try
+            {
+                var msg = new SetLocoSpeedAndDirection_SpeedSteps128Message(data.EAddress, (byte) data.speed, (data.Direction == EDirection.Forwards) ? Direction.Forward : Direction.Reverse);
+                msg.Write(serialPort.BaseStream);
+            }
+            catch (InvalidOperationException e)
+            {
+                //TODO return the exception information to the client
+                IsConnected = false;
+            }
         }
 
         public void SetFunctions(int eAddress, List<IFunc> functionList)
@@ -44,44 +52,15 @@ namespace ELink
             var msg = new SetFunctionOperationInstruction_Group1Message(eAddress, group1Functions[0], group1Functions[1], group1Functions[2], group1Functions[3], group1Functions[4]);
             msg.Write(serialPort.BaseStream);
 
-            // We need to reset sound functions
-            //msgFunction = new SetFunctionOperationInstruction_Group1Message(eAddress, FunctionState.Off, FunctionState.Off, FunctionState.Off, FunctionState.Off, FunctionState.Off);
-            //msgFunction.Write(SerialPort.BaseStream);
-        }
-        
-        public void Disconnect()
-        {
-            var msg = new TrackPowerOffBroadcastMessage();
-            msg.Write(serialPort.BaseStream);
-
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            serialPort?.Dispose();
-            IsConnected = false;
-        }
-
-        private void ResumeOperations()
-        {
-            var msg = new NormalOperationsResumedBroadcastMessage();
-            msg.Write(serialPort.BaseStream);
-        }
-
-        private FuncState[] _GetGroup1FunctionMapping(List<IFunc> functionList)
-        {
-            var functionsInGroup = 5;
-
-            FuncState[] functionMapping = { };
-
-            for (var cursor = 0; cursor < functionsInGroup; cursor++)
-            {
-                var function = functionList.FirstOrDefault(o => o.FunctionIndex == cursor);
-                functionMapping[cursor] = function != null ? (function.State == FuncStates.On ? FunctionState.On : FunctionState.Off) : FunctionState.Off;
+                // We need to reset sound functions
+                //msgFunction = new SetFunctionOperationInstruction_Group1Message(eAddress, FunctionState.Off, FunctionState.Off, FunctionState.Off, FunctionState.Off, FunctionState.Off);
+                //msgFunction.Write(SerialPort.BaseStream);
             }
-
-            return functionMapping;
+            catch (InvalidOperationException e)
+            {
+                //TODO return the exception information to the client
+                IsConnected = false;
+            }
         }
 
         public void SetSignal(ISignal signal)
@@ -105,8 +84,66 @@ namespace ELink
                     break;
             }
 
-            var msgSetup = new AccDecoderOperationsReqMessage(address, state, AccessoryOutput.One);
-            msgSetup.Write(serialPort.BaseStream);
+            try
+            {
+                var msgSetup = new AccDecoderOperationsReqMessage(address, state, AccessoryOutput.One);
+                msgSetup.Write(serialPort.BaseStream);
+            }
+            catch (InvalidOperationException e)
+            {
+                //TODO return the exception information to the client
+                IsConnected = false;
+            }
+        }
+
+        public void Disconnect()
+        {
+            try
+            {
+                var msg = new TrackPowerOffBroadcastMessage();
+                msg.Write(serialPort.BaseStream);
+            }
+            catch (InvalidOperationException e)
+            {
+                //TODO return the exception information to the client
+                IsConnected = false;
+            }
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            serialPort?.Dispose();
+            IsConnected = false;
+        }
+
+        private void ResumeOperations()
+        {
+            try
+            {
+                var msg = new NormalOperationsResumedBroadcastMessage();
+                msg.Write(serialPort.BaseStream);
+            }
+            catch (InvalidOperationException e)
+            {
+                //TODO return the exception information to the client
+                IsConnected = false;
+            }
+        }
+
+        private FuncState[] _GetGroup1FunctionMapping(List<IFunc> functionList)
+        {
+            var functionsInGroup = 5;
+
+            FuncState[] functionMapping = { };
+
+            for (var cursor = 0; cursor < functionsInGroup; cursor++)
+            {
+                var function = functionList.FirstOrDefault(o => o.FunctionIndex == cursor);
+                functionMapping[cursor] = function != null ? (function.State == FuncStates.On ? FunctionState.On : FunctionState.Off) : FunctionState.Off;
+            }
+
+            return functionMapping;
         }
     }
 }

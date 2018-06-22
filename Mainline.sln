@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locomotives", "Locomotives\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functions", "Functions\Functions.csproj", "{23BD6504-9843-43A4-B242-DD90FDB7536E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XpressNetSharp", "..\XpressNetSharp-master\XpressNetSharp\XpressNetSharp.csproj", "{C88B7E76-65BC-4D94-A0D8-12EBDCF6E303}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XpressNetSharp", "XpressNetSharp\XpressNetSharp.csproj", "{C88B7E76-65BC-4D94-A0D8-12EBDCF6E303}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RailwayControl", "RailwayControl", "{00E88E7A-8A1E-4431-850F-28CA74801C56}"
 EndProject

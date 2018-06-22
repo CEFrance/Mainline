@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\XpressNetSharp-master\XpressNetSharp\XpressNetSharp.csproj" />
+    <ProjectReference Include="..\XpressNetSharp\XpressNetSharp.csproj" />
     <ProjectReference Include="..\Accessories\Accessories.csproj" />
     <ProjectReference Include="..\Locomotives\Locomotives.csproj" />
   </ItemGroup>

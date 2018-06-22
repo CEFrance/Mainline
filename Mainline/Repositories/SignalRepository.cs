@@ -12,7 +12,7 @@ namespace Mainline.Repositories
 
         public List<ISignal> GetList()
         {
-            if (Enumerable.Any<ISignal>(signals))
+            if (signals.Any())
             {
                 return signals;
             }
