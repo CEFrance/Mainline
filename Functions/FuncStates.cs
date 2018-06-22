@@ -1,6 +1,6 @@
 ﻿namespace Functions
 {
-    public enum FunctionStates
+    public enum FuncStates
     {
         On,
         Off

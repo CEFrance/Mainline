@@ -15,14 +15,14 @@ namespace Mainline.Controllers
         private readonly IControlCentreService controlService;
         private readonly ILocomotiveRepository locomotiveRepository;
         private readonly ILocomotiveStateService locomotiveStateService;
-        private readonly IFunctionStateService functionStateService;
+        private readonly IFunctionStateService funcStateService;
 
-        public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService, IFunctionStateService functionStateService)
+        public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService, IFunctionStateService funcStateService)
         {
             this.controlService = controlService;
             this.locomotiveRepository = locomotiveRepository;
             this.locomotiveStateService = locomotiveStateService;
-            this.functionStateService = functionStateService;
+            this.funcStateService = funcStateService;
         }
 
         [HttpGet("[action]")]
@@ -66,15 +66,15 @@ namespace Mainline.Controllers
         }
 
         [HttpGet("[action]")]
-        public void SetFunction(int eAddress, IFunction function)
+        public void SetFunction(int eAddress, IFunc func)
         {
-            var func = new Function();
-            func.FunctionIndex = 1;
-            func.FunctionType = FunctionType.Lights;
-            func.State = FunctionStates.On;
+            var func1 = new Func();
+            func1.FunctionIndex = 1;
+            func1.FuncType = FuncType.Lights;
+            func1.State = FuncStates.On;
 
-            functionStateService.SetFunctionState(eAddress, function);
-            var functionState = functionStateService.GetFunctionState(eAddress);
+            funcStateService.SetState(eAddress, func1);
+            var functionState = funcStateService.GetState(eAddress);
 
             controlService.SetFunctions(eAddress, functionState.Functions);
         }

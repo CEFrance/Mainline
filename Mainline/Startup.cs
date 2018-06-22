@@ -26,7 +26,7 @@ namespace Mainline
             services.AddSingleton<ILocomotiveRepository>(new LocomotiveRepository());
             services.AddSingleton<ISignalRepository>(new SignalRepository());
             services.AddSingleton<ILocomotiveStateService>(new LocomotiveStateService());
-            services.AddSingleton<IFunctionStateService>(new FunctionStateService());
+            services.AddSingleton<IFunctionStateService>(new FuncStateService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
