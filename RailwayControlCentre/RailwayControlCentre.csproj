@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Accessories\Accessories.csproj" />
+    <ProjectReference Include="..\Arduino\Arduino.csproj" />
     <ProjectReference Include="..\ELink\ELink.csproj" />
     <ProjectReference Include="..\Locomotives\Locomotives.csproj" />
   </ItemGroup>

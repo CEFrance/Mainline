@@ -5,7 +5,7 @@ using Locomotives;
 
 namespace RailwayControlCentre
 {
-    public interface IControlCentreService
+    public interface ITrainControlCentreService
     {
         void Connect();
         void Disconnect();

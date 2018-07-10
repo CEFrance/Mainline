@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.IO.Ports">
+      <HintPath>..\..\..\Users\cfrance\.nuget\packages\system.io.ports\4.5.0-preview2-26406-04\ref\netstandard2.0\System.IO.Ports.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

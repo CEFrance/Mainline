@@ -12,12 +12,12 @@ namespace Mainline.Controllers
     [Route("api/[controller]")]
     public class TrainController : Controller
     {
-        private readonly IControlCentreService controlService;
+        private readonly ITrainControlCentreService controlService;
         private readonly ILocomotiveRepository locomotiveRepository;
         private readonly ILocomotiveStateService locomotiveStateService;
         private readonly IFunctionStateService funcStateService;
 
-        public TrainController(IControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService, IFunctionStateService funcStateService)
+        public TrainController(ITrainControlCentreService controlService, ILocomotiveRepository locomotiveRepository, ILocomotiveStateService locomotiveStateService, IFunctionStateService funcStateService)
         {
             this.controlService = controlService;
             this.locomotiveRepository = locomotiveRepository;

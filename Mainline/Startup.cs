@@ -22,7 +22,8 @@ namespace Mainline
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IControlCentreService>(new ControlCentreService());
+            services.AddSingleton<ITrainControlCentreService>(new TrainControlCentreService());
+            services.AddSingleton<IArduinoControlCentreService>(new ArduinoControlCentreService());
             services.AddSingleton<ILocomotiveRepository>(new LocomotiveRepository());
             services.AddSingleton<ISignalRepository>(new SignalRepository());
             services.AddSingleton<ILocomotiveStateService>(new LocomotiveStateService());

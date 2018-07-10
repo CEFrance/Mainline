@@ -4,11 +4,11 @@ using RailwayControlCentre;
 namespace Mainline.Controllers
 {
     [Route("api/[controller]")]
-    public class TrainLinkController : Controller
+    public class ArduinoLinkController : Controller
     {
-        private readonly ITrainControlCentreService controlService;
+        private readonly IArduinoControlCentreService controlService;
 
-        public TrainLinkController(ITrainControlCentreService controlService)
+        public ArduinoLinkController(IArduinoControlCentreService controlService)
         {
             this.controlService = controlService;
         }
@@ -41,5 +41,12 @@ namespace Mainline.Controllers
                 Connected = controlService.GetIsConnected()
             };
         }
+
+        [HttpGet("[action]")]
+        public void SetLight(int nLightId, bool state)
+        {
+            controlService.SetLight(nLightId, state);
+        }
+        
     }
 }

@@ -6,11 +6,11 @@ using Locomotives;
 
 namespace RailwayControlCentre
 {
-    public class ControlCentreService : IControlCentreService
+    public class TrainControlCentreService : ITrainControlCentreService
     {
         private readonly ELinkController eLinkController;
 
-        public ControlCentreService()
+        public TrainControlCentreService()
         {
             eLinkController = new ELinkController();
         }

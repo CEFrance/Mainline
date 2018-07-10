@@ -12,10 +12,10 @@ namespace Mainline.Controllers
     [Route("api/[controller]")]
     public class SignalController : Controller
     {
-        private readonly IControlCentreService controlService;
+        private readonly ITrainControlCentreService controlService;
         private readonly ISignalRepository signalRepository;
 
-        public SignalController(IControlCentreService controlService, ISignalRepository signalRepository)
+        public SignalController(ITrainControlCentreService controlService, ISignalRepository signalRepository)
         {
             this.controlService = controlService;
             this.signalRepository = signalRepository;

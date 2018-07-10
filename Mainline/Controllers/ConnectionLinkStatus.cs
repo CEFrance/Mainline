@@ -1,6 +1,6 @@
 ﻿namespace Mainline.Controllers
 {
-    public class TrainLinkStatus
+    public class ConnectionLinkStatus
     {
         public bool Connected { get; set; }
     }

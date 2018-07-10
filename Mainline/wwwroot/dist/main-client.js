@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dc73efb482f2740194c4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9b91cf2173b0cbbd697f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2032,14 +2032,23 @@ var HomeComponent = (function () {
         var _this = this;
         this.http = http;
         this.baseUrl = baseUrl;
-        http.get(baseUrl + 'api/TrainLink/Status').subscribe(function (result) {
+        http.get(baseUrl + 'api/trainlink/status').subscribe(function (result) {
             _this.trainLinkStatus = result.json();
         }, function (error) { return console.error(error); });
+        http.get(baseUrl + 'api/arduinolink/status').subscribe(function (result) {
+            _this.arduinoLinkStatus = result.json();
+        }, function (error) { return console.error(error); });
     }
-    HomeComponent.prototype.connect = function () {
+    HomeComponent.prototype.connectTrainLink = function () {
         var _this = this;
-        this.http.get(this.baseUrl + 'api/TrainLink/Connect').subscribe(function (result) {
-            _this.trainLinkStatus = result.json();
+        this.http.get(this.baseUrl + 'api/trainlink/connect').subscribe(function (result) {
+            _this.arduinoLinkStatus = result.json();
+        }, function (error) { return console.error(error); });
+    };
+    HomeComponent.prototype.connectArduinoLink = function () {
+        var _this = this;
+        this.http.get(this.baseUrl + 'api/arduinolink/connect').subscribe(function (result) {
+            _this.arduinoLinkStatus = result.json();
         }, function (error) { return console.error(error); });
     };
     HomeComponent = __decorate([
@@ -2618,7 +2627,7 @@ module.exports = "<h2>Trains</h2>\r\n<p *ngIf=\"trainService.isLoading()\"><em>L
 /* 38 */
 /***/ (function(module, exports) {
 
-module.exports = "<p *ngIf=\"!trainLinkStatus\"><em>Loading status...</em></p>\r\n\r\n<div *ngIf=\"trainLinkStatus\">\r\n    <p *ngIf=\"trainLinkStatus.connected\">eLink connected</p>\r\n    <p *ngIf=\"!trainLinkStatus.connected\">eLink not connected</p>\r\n    <button *ngIf=\"!trainLinkStatus.connected\" (click)=\"connect()\">Connect</button>\r\n</div>";
+module.exports = "<p *ngIf=\"!trainLinkStatus && !arduinoLinkStatus\"><em>Loading status...</em></p>\r\n\r\n<div *ngIf=\"trainLinkStatus\">\r\n    <p *ngIf=\"trainLinkStatus.connected\">eLink connected</p>\r\n    <p *ngIf=\"!trainLinkStatus.connected\">eLink not connected</p>\r\n    <button *ngIf=\"!trainLinkStatus.connected\" (click)=\"connectTrainLink()\">Connect</button>\r\n</div>\r\n\r\n<div *ngIf=\"arduinoLinkStatus\">\r\n    <p *ngIf=\"arduinoLinkStatus.connected\">Arduino connected</p>\r\n    <p *ngIf=\"!arduinoLinkStatus.connected\">Arduino not connected</p>\r\n    <button *ngIf=\"!arduinoLinkStatus.connected\" (click)=\"connectArduinoLink()\">Connect</button>\r\n</div>";
 
 /***/ }),
 /* 39 */
