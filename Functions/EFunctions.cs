@@ -3,17 +3,16 @@ using System.Collections.Generic;
 
 namespace Functions
 {
-    [Serializable]
-    public class EFunctions : IEFunctions
+    public class EFunctions
     {
         public ushort EAddress { get; set; }
         public bool HasSound { get; set; }
-        public List<IFunc> Function { get; }
+        public List<Func> Function { get; }
 
         public EFunctions()
         {
             HasSound = false;
-            Function = new List<IFunc>();
+            Function = new List<Func>();
         }
     }
 }

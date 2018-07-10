@@ -44,7 +44,7 @@ namespace ELink
             }
         }
 
-        public void SetFunctions(int eAddress, List<IFunc> functionList)
+        public void SetFunctions(int eAddress, List<Func> functionList)
         {
             var group1Functions = _GetGroup1FunctionMapping(functionList);
             //var group2Functions = _GetGroup2FunctionMapping(functionList);
@@ -132,11 +132,11 @@ namespace ELink
             }
         }
 
-        private FunctionState[] _GetGroup1FunctionMapping(List<IFunc> functionList)
+        private FunctionState[] _GetGroup1FunctionMapping(List<Func> functionList)
         {
             var functionsInGroup = 5;
 
-            FunctionState[] functionMapping = { };
+            FunctionState[] functionMapping = new FunctionState[functionsInGroup];
 
             for (var cursor = 0; cursor < functionsInGroup; cursor++)
             {

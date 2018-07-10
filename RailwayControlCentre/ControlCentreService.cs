@@ -38,7 +38,7 @@ namespace RailwayControlCentre
             }
         }
 
-        public void SetFunctions(int eAddress, List<IFunc> functions)
+        public void SetFunctions(int eAddress, List<Func> functions)
         {
             if (eLinkController.IsConnected)
             {

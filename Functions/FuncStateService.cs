@@ -5,11 +5,11 @@ namespace Functions
 {
     public class FuncStateService : IFunctionStateService
     {
-        private readonly List<IFuncState> functionState = new List<IFuncState>();
+        private readonly List<FuncState> functionState = new List<FuncState>();
 
-        public IFuncState GetState(int eAddress)
+        public FuncState GetState(int eAddress)
         {
-            IFuncState state = functionState.FirstOrDefault(o => o.EAddress == eAddress);
+            FuncState state = functionState.FirstOrDefault(o => o.EAddress == eAddress);
             if (state == null)
             {
                 state = new FuncState()
@@ -22,7 +22,7 @@ namespace Functions
             return state;
         }
 
-        public void SetState(int eAddress, IFunc newState)
+        public void SetState(int eAddress, Func newState)
         {
             var state = GetState(eAddress);
 

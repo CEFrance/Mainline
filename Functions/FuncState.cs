@@ -2,14 +2,14 @@
 
 namespace Functions
 {
-    public class FuncState : IFuncState
+    public class FuncState
     {
         public int EAddress { get; set; }
-        public List<IFunc> Functions { get; set; }
+        public List<Func> Functions { get; set; }
 
         public FuncState()
         {
-            Functions = new List<IFunc>();
+            Functions = new List<Func>();
         }
     }
 }

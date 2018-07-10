@@ -135,7 +135,7 @@ namespace Mainline.Controllers
         }
 
         [HttpGet("[action]")]
-        public void SetFunction(int eAddress, IFunc func)
+        public void SetFunction(int eAddress, Func func)
         {
             var func1 = new Func();
             func1.FunctionIndex = 1;

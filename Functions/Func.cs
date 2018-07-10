@@ -1,6 +1,6 @@
 ﻿namespace Functions
 {
-    public class Func : IFunc
+    public class Func
     {
         public int FunctionIndex { get; set; }
         public FuncType FuncType { get; set; }

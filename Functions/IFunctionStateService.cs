@@ -2,7 +2,7 @@
 {
     public interface IFunctionStateService
     {
-        IFuncState GetState(int eAddress);
-        void SetState(int eAddress, IFunc newState);
+        FuncState GetState(int eAddress);
+        void SetState(int eAddress, Func newState);
     }
 }
